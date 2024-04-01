@@ -134,4 +134,9 @@ sed -i "s|persist.camera.debug.logfile|persist.vendor.camera.dbglog|g" "${DEVICE
 "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libfpnav.so
 "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libfpservice.so
 
+# RIL
+for v in 1.{0..2}; do
+    sed -i "s|android.hardware.radio.config@${v}.so|android.hardware.radio.c_shim@${v}.so|g" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libril-qc-hal-qmi.so"
+done
+
 "${MY_DIR}/setup-makefiles.sh"
