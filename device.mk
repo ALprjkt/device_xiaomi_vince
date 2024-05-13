@@ -208,6 +208,9 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1.vendor \
     libunwind
 
+PRODUCT_PACKAGES += \
+    libvendor.goodix.hardware.fingerprint@1.0.vendor
+
 # FM
 PRODUCT_PACKAGES += \
     RevampedFMRadio \
@@ -428,6 +431,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/xiaomi
+    vendor/fingerprint/opensource/interfaces
 
 # TextClassifier smart selection model files
 PRODUCT_COPY_FILES += \
