@@ -296,10 +296,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service \
-    android.hardware.light@2.0.vendor \
-    lights.msm8953
+    android.hardware.light-service.xiaomi
 
 # Lineage Health
 PRODUCT_PACKAGES += \
@@ -426,6 +423,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libui_shim \
     libui_shim.vendor:32
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH) \
+    hardware/xiaomi
 
 # TextClassifier smart selection model files
 PRODUCT_COPY_FILES += \
