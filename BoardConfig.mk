@@ -39,8 +39,13 @@ BUILD_BROKEN_DUP_RULES := true
 
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
-
 TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+
+# ART
+ART_BUILD_TARGET_NDEBUG := true
+ART_BUILD_TARGET_DEBUG := false
+ART_BUILD_HOST_NDEBUG := true
+ART_BUILD_HOST_DEBUG := false
 
 # Kernel
 TARGET_KERNEL_CONFIG := vince_defconfig
@@ -240,4 +245,9 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
+<<<<<<< HEAD
 -include vendor/xiaomi/vince/BoardConfigVendor.mk
+=======
+-include vendor/xiaomi/ysl/BoardConfigVendor.mk
+-include vendor/xiaomi/msm8953-common/BoardConfigVendor.mk
+>>>>>>> a22ebd22 (ysl: Disable ART)
