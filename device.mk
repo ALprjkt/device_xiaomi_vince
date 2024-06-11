@@ -145,6 +145,10 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     Snap
 
+# GrapheneOS
+PRODUCT_PACKAGES += \
+    GrapheneOS
+
 # Consumerir
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
