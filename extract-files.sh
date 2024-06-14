@@ -84,7 +84,7 @@ function blob_fixup() {
 	    sed -i 's/group.*/& uhid/' "${2}"
 	;;
 	vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0-service.so)
-	    "${PATCHELF_0_8}" --remove-needed "libprotobuf-cpp-lite.so" "${2}"
+	    "${PATCHELF_0_17_2}" --remove-needed "libprotobuf-cpp-lite.so" "${2}"
 	;;
 	vendor/bin/pm-service)
             grep -q "libutils-v33.so" "${2}" || "${PATCHELF}" --add-needed "libutils-v33.so" "${2}"
@@ -102,13 +102,13 @@ function blob_fixup() {
 	    fi
 	;;
 	vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0.so)
-            "${PATCHELF_0_8}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
+            "${PATCHELF_0_17_2}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
 	;;
 	esac
 
 # For all ELF files
 	    if [[ "${1}" =~ ^.*(\.so|\/bin\/.*)$ ]]; then
-	        "${PATCHELF}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${2}"
+	        "${PATCHELF_0_17_2}" --replace-needed "libstdc++.so" "libstdc++_vendor.so" "${2}"
 	    fi
 
 }
