@@ -101,6 +101,9 @@ function blob_fixup() {
 	        exit;
 	    fi
 	;;
+	vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0.so)
+            "${PATCHELF_0_8}" --replace-needed "libhidlbase.so" "libhidlbase-v32.so" "${2}"
+	;;
 	esac
 
 # For all ELF files
