@@ -542,43 +542,6 @@ function sdm660_sched_schedutil_dcvs() {
 
 target=`getprop ro.board.platform`
 
-function configure_zram_parameters() {
-    MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-    MemTotal=${MemTotalStr:16:8}
-
-    low_ram=`getprop ro.config.low_ram`
-
-    # Zram disk - 75% for Go devices.
-    # For 512MB Go device, size = 384MB, set same for Non-Go.
-    # For 1GB Go device, size = 768MB, set same for Non-Go.
-    # For 2GB Go device, size = 1536MB, set same for Non-Go.
-    # For >=2GB Non-Go device, size = 1GB
-    # And enable lz4 zram compression for Go targets.
-
-    if [ "$low_ram" == "true" ]; then
-        echo lz4 > /sys/block/zram0/comp_algorithm
-    fi
-
-    if [ -f /sys/block/zram0/disksize ]; then
-        if [ -f /sys/block/zram0/use_dedup ]; then
-            echo 1 > /sys/block/zram0/use_dedup
-        fi
-        echo 1073741824 > /sys/block/zram0/disksize
-
-        # ZRAM may use more memory than it saves if SLAB_STORE_USER
-        # debug option is enabled.
-        if [ -e /sys/kernel/slab/zs_handle ]; then
-            echo 0 > /sys/kernel/slab/zs_handle/store_user
-        fi
-        if [ -e /sys/kernel/slab/zspage ]; then
-            echo 0 > /sys/kernel/slab/zspage/store_user
-        fi
-
-        mkswap /dev/block/zram0
-        swapon /dev/block/zram0 -p 32758
-    fi
-}
-
 function configure_read_ahead_kb_values() {
     MemTotalStr=`cat /proc/meminfo | grep MemTotal`
     MemTotal=${MemTotalStr:16:8}
@@ -656,11 +619,8 @@ ProductName=`getprop ro.product.name`
 low_ram=`getprop ro.config.low_ram`
 
 if [ "$ProductName" == "msmnile" ] || [ "$ProductName" == "kona" ] || [ "$ProductName" == "sdmshrike_au" ]; then
-      # Enable ZRAM
-      configure_zram_parameters
       configure_read_ahead_kb_values
       echo 0 > /proc/sys/vm/page-cluster
-      echo 100 > /proc/sys/vm/swappiness
 else
     arch_type=`uname -m`
 
