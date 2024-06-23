@@ -28,7 +28,6 @@ $(call inherit-product, vendor/qassa/config/common_full_phone.mk)
 TARGET_FACE_UNLOCK_SUPPORTED := true
 TARGET_BOOT_ANIMATION_RES := 720
 TARGET_GAPPS_ARCH := arm64
-WITH_GAPPS := true
 USE_PIXEL_CHARGING := true
 
 # Device identifier. This must come after all inclusions
